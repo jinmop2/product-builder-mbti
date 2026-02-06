@@ -15,9 +15,14 @@
     <header class="app-header">
       <div class="logo">🔮 MBTI Chemistry</div>
       <p class="subtitle">나와 그 사람의 궁합은 몇 점?</p>
+      <!-- New navigation buttons -->
+      <div class="nav-buttons">
+        <button id="show-compatibility" class="nav-button active">궁합 확인</button>
+        <button id="show-test" class="nav-button">MBTI 테스트</button>
+      </div>
     </header>
 
-    <div class="main-layout">
+    <div class="main-layout" id="compatibility-section">
       <!-- Person A Selection -->
       <section class="selection-area" id="area-left">
         <div class="area-header">
@@ -44,6 +49,37 @@
           <div class="mbti-grid" id="grid-right"></div>
         </div>
       </section>
+    </div>
+
+    <!-- New test section, initially hidden -->
+    <div class="test-section" id="test-section">
+      <div class="test-welcome screen active">
+        <h2>내 MBTI 찾기</h2>
+        <p>이 테스트는 비공식적인 MBTI 선호도 검사입니다. 재미로 활용해 주시고, 공식 검사와는 차이가 있을 수 있습니다.</p>
+        <p class="disclaimer"><strong>주의:</strong> 본 테스트는 MBTI 공식 검사가 아니며, 전문적인 성격 진단을 대체할 수 없습니다.</p>
+        <button id="start-test" class="cta-button">테스트 시작하기</button>
+      </div>
+
+      <div class="test-questions screen">
+        <div class="progress-bar">
+          <div class="progress" style="width: 0%;"></div>
+        </div>
+        <div id="question-container" class="question-container">
+          <!-- Questions will be dynamically loaded here -->
+        </div>
+        <div class="test-navigation">
+          <button id="prev-question" class="nav-button" disabled>이전</button>
+          <button id="next-question" class="nav-button">다음</button>
+        </div>
+      </div>
+
+      <div class="test-result screen">
+        <h2>당신의 MBTI는?</h2>
+        <h1 id="test-result-mbti">XXXX</h1>
+        <p id="test-result-desc"></p>
+        <button id="check-compatibility-from-test" class="cta-button">궁합 확인하러 가기</button>
+        <button id="retake-test" class="nav-button">다시 테스트하기</button>
+      </div>
     </div>
 
     <!-- Floating Action Bar -->

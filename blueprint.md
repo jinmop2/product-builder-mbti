@@ -45,7 +45,7 @@ A web-based application to check compatibility between two MBTI personality type
 ---
 
 ## Current Task
-The user wants more accurate, detailed, and empathetic compatibility interpretations for each MBTI combination. This requires extensive content generation and research.
+The user wants to add an MBTI test menu that provides a clean, accurate (unofficial), and engaging self-assessment.
 
 ## Plan: Code Review and Enhancement Identification
 1.  **Code Review**: Examine `index.html`, `style.css`, and `main.js` to understand the current implementation and verify the features listed as "Completed" in this blueprint. **(Completed)**
@@ -70,7 +70,7 @@ The user wants more accurate, detailed, and empathetic compatibility interpretat
     *   **Heart Icon Animation**: Added `pulse-heart` keyframe animation and `.heart-icon.active` class in `style.css`. Integrated JavaScript in `updateActionBar` to toggle this class.
     *   **Modal Entrance Animation**: Enhanced modal entrance with combined `transform` (scale) and `opacity` transitions in `style.css` for a more engaging fade-in and subtle bounce.
 
-## Plan: Enhance Compatibility Interpretations (Current Request)
+## Plan: Enhance Compatibility Interpretations
 1.  **Explain Scope**: Acknowledge that generating highly detailed, unique, and empathetic interpretations for all 136 unique MBTI pairs is a significant content creation task. Focus will be on enhancing the generation logic and populating key pairs. **(Completed)**
 2.  **Research Detailed Compatibility**: Conduct targeted web research using Google to find more nuanced interpretations, relationship dynamics, common strengths, and challenges for various MBTI pairs. Prioritize Korean resources. Look for patterns or frameworks in interpretations. **(Completed - initial research)**
 3.  **Enhance `COMPATIBILITY_DETAILS` Structure**: Potentially evolve the `COMPATIBILITY_DETAILS` object to support more complex logic or categorization (e.g., by functional preferences, interaction styles). **(Completed - Added `preferences` to `MBTI_TYPES`)**
@@ -80,3 +80,25 @@ The user wants more accurate, detailed, and empathetic compatibility interpretat
     *   **Empathetic and Fun Language**: Ensured the generated descriptions maintain an engaging, empathetic, and slightly humorous tone.
 5.  **Iterative Content Creation**: Begin populating more specific `pairings` within `COMPATIBILITY_DETAILS` based on research, prioritizing more frequently sought-after combinations. **(Ongoing - can be further expanded)**
 6.  **Review and Refine**: Continuously review generated descriptions for accuracy, tone, and user engagement, refining the underlying logic and content as needed. **(Ongoing)**
+
+---
+
+## Plan: Implement MBTI Self-Test Menu
+1.  **Acknowledge and Set Expectations**: Explain that an *unofficial, simplified questionnaire* will be created due to the proprietary nature of official MBTI tests. Emphasize disclaimers for accuracy.
+2.  **Research Questionnaire Structure**: Briefly research common patterns for unofficial MBTI-like self-assessments (question types, number of questions per dichotomy).
+3.  **HTML Structure**:
+    *   Add a new `test-section` HTML element, initially hidden.
+    *   Include a welcome/disclaimer screen, a container for questions, navigation buttons (next/back/submit), and a results display area.
+    *   Add a menu item (e.g., in the header or action bar) to navigate to the test.
+4.  **CSS Styling**: Style the test interface to be clean, modern, and responsive, consistent with the existing design. Use animations for transitions between questions.
+5.  **JavaScript Logic (`main.js`)**:
+    *   **Questionnaire Data**: Define an array of test questions, each linked to a dichotomy (E/I, S/N, T/F, J/P).
+    *   **State Management**: Track current question index, user answers, and accumulated scores for each dichotomy.
+    *   **Dynamic Rendering**: Display one question at a time, update progress.
+    *   **Answer Handling**: Store user selections.
+    *   **Scoring Logic**: Tally points to determine the dominant preference for each dichotomy.
+    *   **Result Calculation**: Combine preferences into a 4-letter MBTI type.
+    *   **Result Display**: Show the calculated MBTI type, a brief description, and offer an option to "Check Compatibility" with the calculated type pre-filled.
+    *   **Navigation**: Implement functions to switch between compatibility checker and test section.
+6.  **Disclaimers**: Integrate clear disclaimers within the test and result sections.
+7.  **Update `blueprint.md`**: Document the progress of this feature.
