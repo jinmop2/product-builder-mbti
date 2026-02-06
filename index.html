@@ -1,14 +1,89 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>MBTI 궁합 테스트</title>
+  
+  <!-- Pretendard Font (High Quality Korean Font) -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+  
+  <link href="style.css" rel="stylesheet">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+  <div id="app">
+    <header class="app-header">
+      <div class="logo">🔮 MBTI Chemistry</div>
+      <p class="subtitle">나와 그 사람의 궁합은 몇 점?</p>
+    </header>
+
+    <div class="main-layout">
+      <!-- Person A Selection -->
+      <section class="selection-area" id="area-left">
+        <div class="area-header">
+          <span class="badge">ME</span>
+          <h2>나의 MBTI</h2>
+        </div>
+        <div class="grid-wrapper">
+          <div class="mbti-grid" id="grid-left"></div>
+        </div>
+      </section>
+
+      <!-- Connection Line (Desktop) -->
+      <div class="connector">
+        <div class="heart-icon">⚡</div>
+      </div>
+
+      <!-- Person B Selection -->
+      <section class="selection-area" id="area-right">
+        <div class="area-header">
+          <span class="badge badge-pink">YOU</span>
+          <h2>상대의 MBTI</h2>
+        </div>
+        <div class="grid-wrapper">
+          <div class="mbti-grid" id="grid-right"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Floating Action Bar -->
+    <div id="action-bar" class="floating-bar">
+      <button id="check-btn" class="cta-button" aria-haspopup="dialog">
+        궁합 확인하기 ✨
+      </button>
+    </div>
+  </div>
+
+  <!-- Result Modal -->
+  <div id="result-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="result-text">
+    <div class="modal-card">
+      <button class="close-btn">&times;</button>
+      
+      <div class="modal-header">
+        <div class="modal-emoji" id="modal-emoji">💘</div>
+        <div class="match-context" id="match-context">INTJ 🩷 ENFP</div>
+      </div>
+
+      <div class="score-container">
+        <h1 id="result-score">99점</h1>
+      </div>
+
+      <h2 id="modal-title" class="result-title">환상의 짝꿍!</h2>
+      <p id="result-text" class="result-desc">
+        서로의 부족한 점을 완벽하게 채워주는 관계입니다.
+      </p>
+
+      <div class="modal-actions">
+        <button id="share-btn" class="share-button">
+          결과 공유하기
+        </button>
+        <button onclick="document.getElementById('result-modal').classList.remove('active')" class="retry-button">
+          다시 하기
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script defer src="main.js"></script>
 </body>
 </html>
