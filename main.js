@@ -1,26 +1,31 @@
 // Data Definitions (Korean)
 const MBTI_TYPES = [
   // Analysts (NT) - 보라
-  { code: 'INTJ', group: 'NT', label: '전략가', desc: '용의주도한 전략가', emoji: '🧠' },
-  { code: 'INTP', group: 'NT', label: '논리술사', desc: '논리적인 사색가', emoji: '🧪' },
-  { code: 'ENTJ', group: 'NT', label: '통솔자', desc: '대담한 통솔자', emoji: '🫡' },
-  { code: 'ENTP', group: 'NT', label: '변론가', desc: '뜨거운 논쟁을 즐기는 변론가', emoji: '🗣️' },
+  { code: 'INTJ', group: 'NT', label: '전략가', desc: '용의주도한 전략가', emoji: '🧠', preferences: ['I', 'N', 'T', 'J'] },
+  { code: 'INTP', group: 'NT', label: '논리술사', desc: '논리적인 사색가', emoji: '🧪', preferences: ['I', 'N', 'T', 'P'] },
+  { code: 'ENTJ', group: 'NT', label: '통솔자', desc: '대담한 통솔자', emoji: '🫡', preferences: ['E', 'N', 'T', 'J'] },
+  { code: 'ENTP', group: 'NT', label: '변론가', desc: '뜨거운 논쟁을 즐기는 변론가', emoji: '🗣️', preferences: ['E', 'N', 'T', 'P'] },
   // Diplomats (NF) - 초록
-  { code: 'INFJ', group: 'NF', label: '옹호자', desc: '선의의 옹호자', emoji: '🧙' },
-  { code: 'INFP', group: 'NF', label: '중재자', desc: '열정적인 중재자', emoji: '🌻' },
-  { code: 'ENFJ', group: 'NF', label: '선도자', desc: '정의로운 사회운동가', emoji: '⚔️' },
-  { code: 'ENFP', group: 'NF', label: '활동가', desc: '재기발랄한 활동가', emoji: '🦄' },
+  { code: 'INFJ', group: 'NF', label: '옹호자', desc: '선의의 옹호자', emoji: '🧙', preferences: ['I', 'N', 'F', 'J'] },
+  { code: 'INFP', group: 'NF', label: '중재자', desc: '열정적인 중재자', emoji: '🌻', preferences: ['I', 'N', 'F', 'P'] },
+  { code: 'ENFJ', group: 'NF', label: '선도자', desc: '정의로운 사회운동가', emoji: '⚔️', preferences: ['E', 'N', 'F', 'J'] },
+  { code: 'ENFP', group: 'NF', label: '활동가', desc: '재기발랄한 활동가', emoji: '🦄', preferences: ['E', 'N', 'F', 'P'] },
   // Sentinels (SJ) - 파랑
-  { code: 'ISTJ', group: 'SJ', label: '현실주의자', desc: '청렴결백한 논리주의자', emoji: '📊' },
-  { code: 'ISFJ', group: 'SJ', label: '수호자', desc: '용감한 수호자', emoji: '🛡️' },
-  { code: 'ESTJ', group: 'SJ', label: '경영자', desc: '엄격한 관리자', emoji: '💼' },
-  { code: 'ESFJ', group: 'SJ', label: '집정관', desc: '사교적인 외교관', emoji: '🍰' },
+  { code: 'ISTJ', group: 'SJ', label: '현실주의자', desc: '청렴결백한 논리주의자', emoji: '📊', preferences: ['I', 'S', 'T', 'J'] },
+  { code: 'ISFJ', group: 'SJ', label: '수호자', desc: '용감한 수호자', emoji: '🛡️', preferences: ['I', 'S', 'F', 'J'] },
+  { code: 'ESTJ', group: 'SJ', label: '경영자', desc: '엄격한 관리자', emoji: '💼', preferences: ['E', 'S', 'T', 'J'] },
+  { code: 'ESFJ', group: 'SJ', label: '집정관', desc: '사교적인 외교관', emoji: '🍰', preferences: ['E', 'S', 'F', 'J'] },
   // Explorers (SP) - 노랑
-  { code: 'ISTP', group: 'SP', label: '장인', desc: '만능 재주꾼', emoji: '🔧' },
-  { code: 'ISFP', group: 'SP', label: '예술가', desc: '호기심 많은 예술가', emoji: '🎨' },
-  { code: 'ESTP', group: 'SP', label: '사업가', desc: '모험을 즐기는 사업가', emoji: '🚀' },
-  { code: 'ESFP', group: 'SP', label: '연예인', desc: '자유로운 영혼의 연예인', emoji: '🎤' }
+  { code: 'ISTP', group: 'SP', label: '장인', desc: '만능 재주꾼', emoji: '🔧', preferences: ['I', 'S', 'T', 'P'] },
+  { code: 'ISFP', group: 'SP', label: '예술가', desc: '호기심 많은 예술가', emoji: '🎨', preferences: ['I', 'S', 'F', 'P'] },
+  { code: 'ESTP', group: 'SP', label: '사업가', desc: '모험을 즐기는 사업가', emoji: '🚀', preferences: ['E', 'S', 'T', 'P'] },
+  { code: 'ESFP', group: 'SP', label: '연예인', desc: '자유로운 영혼의 연예인', emoji: '🎤', preferences: ['E', 'S', 'F', 'P'] }
 ];
+
+const MBTI_TYPES_MAP = MBTI_TYPES.reduce((map, type) => {
+  map[type.code] = type;
+  return map;
+}, {});
 
 // State
 const state = {
@@ -37,6 +42,53 @@ function getTabbableElements(container) {
       'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
     )
   ).filter(el => el.offsetWidth > 0 || el.offsetHeight > 0 || el === document.activeElement);
+}
+
+function generateFunctionalDescription(typeA, typeB) {
+  const prefsA = MBTI_TYPES_MAP[typeA].preferences;
+  const prefsB = MBTI_TYPES_MAP[typeB].preferences;
+  const descriptions = [];
+
+  const preferenceMap = {
+    'E': '외향적', 'I': '내향적',
+    'S': '현실적', 'N': '직관적',
+    'T': '이성적', 'F': '감성적',
+    'J': '계획적', 'P': '자율적'
+  };
+
+  // Dimension 1: E/I
+  if (prefsA[0] === prefsB[0]) {
+    if (prefsA[0] === 'E') descriptions.push("둘 다 외향적이라 에너지 넘치는 활동을 즐기며, 활발한 교류로 관계를 풍성하게 만듭니다.");
+    else descriptions.push("둘 다 내향적이라 조용하고 아늑한 시간을 선호하며, 서로의 독립적인 공간을 존중해 줍니다.");
+  } else {
+    descriptions.push("한 명은 에너지를 발산하고, 다른 한 명은 에너지를 충전합니다. 서로에게 새로운 관점을 제공하지만, 활동량 조절이 필요할 수 있습니다.");
+  }
+
+  // Dimension 2: S/N
+  if (prefsA[1] === prefsB[1]) {
+    if (prefsA[1] === 'S') descriptions.push("둘 다 현실적이고 구체적인 것을 중요하게 여겨 실용적인 문제 해결에 강합니다. 안정적이고 예측 가능한 관계를 선호합니다.");
+    else descriptions.push("둘 다 직관적이고 추상적인 것을 즐겨 아이디어 공유와 미래 계획에 열정적입니다. 깊이 있는 대화와 무한한 가능성을 탐구합니다.");
+  } else {
+    descriptions.push("한 명은 현재와 사실에 집중하고, 다른 한 명은 가능성과 미래를 봅니다. 서로에게 현실감각과 비전을 제공하지만, 관점 차이로 오해가 생길 수 있습니다.");
+  }
+
+  // Dimension 3: T/F
+  if (prefsA[2] === prefsB[2]) {
+    if (prefsA[2] === 'T') descriptions.push("둘 다 논리적이고 분석적으로 문제를 해결하며, 감정보다는 사실에 기반한 결정을 내립니다. 효율성과 합리성을 중시합니다.");
+    else descriptions.push("둘 다 사람들의 감정과 조화를 중요하게 여겨 공감하고 배려하는 관계를 지향합니다. 따뜻하고 배려심 깊은 소통을 나눕니다.");
+  } else {
+    descriptions.push("한 명은 이성적인 판단을, 다른 한 명은 감정적인 조화를 중시합니다. 서로에게 필요한 균형을 제공하지만, 의사결정 과정에서 상호 이해와 존중이 필요합니다.");
+  }
+
+  // Dimension 4: J/P
+  if (prefsA[3] === prefsB[3]) {
+    if (prefsA[3] === 'J') descriptions.push("둘 다 계획적이고 체계적으로 생활하며, 질서와 완벽함을 추구합니다. 함께 목표를 세우고 달성하는 것을 좋아합니다.");
+    else descriptions.push("둘 다 유연하고 자율적인 생활을 선호하며, 즉흥적인 활동과 변화를 즐깁니다. 함께 자유롭고 구속 없는 시간을 보냅니다.");
+  } else {
+    descriptions.push("한 명은 계획을 세우고, 다른 한 명은 상황에 따라 유연하게 대처합니다. 서로에게 조직력과 융통성을 줄 수 있지만, 생활 방식 차이로 갈등이 생길 수 있습니다.");
+  }
+  
+  return descriptions;
 }
 
 function init() {
@@ -250,7 +302,7 @@ function calculateCompatibility(typeA, typeB) {
 
   let score;
   let title;
-  let desc;
+  let desc; // This will now be an array
 
   // 1. Check for specific pairings (including same-type)
   let compatibilityInfo;
@@ -273,23 +325,18 @@ function calculateCompatibility(typeA, typeB) {
     }
     score = Math.abs(hash % 101);
 
-    // 3. Determine description from score ranges
+    // 3. Generate description using functional logic
+    desc = generateFunctionalDescription(typeA, typeB);
+
+    // 4. Determine title from score ranges (score is hash-based)
     if (score >= 90) {
-      const details = COMPATIBILITY_DETAILS.scoreRanges.excellent;
-      title = details.title;
-      desc = details.desc;
+      title = COMPATIBILITY_DETAILS.scoreRanges.excellent.title;
     } else if (score >= 70) {
-      const details = COMPATIBILITY_DETAILS.scoreRanges.good;
-      title = details.title;
-      desc = details.desc;
+      title = COMPATIBILITY_DETAILS.scoreRanges.good.title;
     } else if (score >= 50) {
-      const details = COMPATIBILITY_DETAILS.scoreRanges.needsWork;
-      title = details.title;
-      desc = details.desc;
+      title = COMPATIBILITY_DETAILS.scoreRanges.needsWork.title;
     } else {
-      const details = COMPATIBILITY_DETAILS.scoreRanges.bad;
-      title = details.title;
-      desc = details.desc;
+      title = COMPATIBILITY_DETAILS.scoreRanges.bad.title;
     }
   }
   

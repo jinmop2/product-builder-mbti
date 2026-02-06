@@ -45,7 +45,7 @@ A web-based application to check compatibility between two MBTI personality type
 ---
 
 ## Current Task
-The user has requested to "make an MBTI compatibility site, and make it well." This implies a need to review existing implementations, ensure high quality, and potentially add further polish or features beyond what is currently implemented, focusing on design, UX, and robust functionality.
+The user wants more accurate, detailed, and empathetic compatibility interpretations for each MBTI combination. This requires extensive content generation and research.
 
 ## Plan: Code Review and Enhancement Identification
 1.  **Code Review**: Examine `index.html`, `style.css`, and `main.js` to understand the current implementation and verify the features listed as "Completed" in this blueprint. **(Completed)**
@@ -63,9 +63,20 @@ The user has requested to "make an MBTI compatibility site, and make it well." T
     *   **Implement ARIA attributes**: Added `aria-haspopup="dialog"` to the trigger button and `role="dialog"`, `aria-modal="true"`, `aria-labelledby`, `aria-describedby` to the result modal.
     *   **Improve keyboard navigation**: `div` elements for MBTI cards already had `role="button"` and `tabIndex="0"`.
     *   **Focus management for modal**: Implemented storing `lastActiveElement`, focusing `closeModalBtn` on modal open, returning focus on modal close, and a focus trap using `getTabbableElements` and `trapTabKey` functions, along with Escape key closing.
-2.  **Refine Compatibility Descriptions**: **(Completed)**
+2.  **Refine Compatibility Descriptions**: **(Completed for initial phase)**
     *   **Enrich `MBTI_TYPES` data**: Created `COMPATIBILITY_DETAILS` object with `scoreRanges` (excellent, good, needsWork, bad) and `pairings` for specific and same-type matches.
     *   **Update `calculateCompatibility`**: Refactored to use `COMPATIBILITY_DETAILS` for scores, titles, and array-based descriptions.
 3.  **Subtle Visual Polish**: **(Completed)**
     *   **Heart Icon Animation**: Added `pulse-heart` keyframe animation and `.heart-icon.active` class in `style.css`. Integrated JavaScript in `updateActionBar` to toggle this class.
     *   **Modal Entrance Animation**: Enhanced modal entrance with combined `transform` (scale) and `opacity` transitions in `style.css` for a more engaging fade-in and subtle bounce.
+
+## Plan: Enhance Compatibility Interpretations (Current Request)
+1.  **Explain Scope**: Acknowledge that generating highly detailed, unique, and empathetic interpretations for all 136 unique MBTI pairs is a significant content creation task. Focus will be on enhancing the generation logic and populating key pairs. **(Completed)**
+2.  **Research Detailed Compatibility**: Conduct targeted web research using Google to find more nuanced interpretations, relationship dynamics, common strengths, and challenges for various MBTI pairs. Prioritize Korean resources. Look for patterns or frameworks in interpretations. **(Completed - initial research)**
+3.  **Enhance `COMPATIBILITY_DETAILS` Structure**: Potentially evolve the `COMPATIBILITY_DETAILS` object to support more complex logic or categorization (e.g., by functional preferences, interaction styles). **(Completed - Added `preferences` to `MBTI_TYPES`)**
+4.  **Implement Dynamic Description Generation (Hybrid Approach)**: **(Completed)**
+    *   **Specific Overrides**: Continue to provide highly customized descriptions for well-known "golden pairs" or "challenging pairs."
+    *   **Functional Combination Logic**: Developed `generateFunctionalDescription` to combine generic phrases based on the alignment or opposition of their individual MBTI functions (I/E, S/N, T/F, J/P).
+    *   **Empathetic and Fun Language**: Ensured the generated descriptions maintain an engaging, empathetic, and slightly humorous tone.
+5.  **Iterative Content Creation**: Begin populating more specific `pairings` within `COMPATIBILITY_DETAILS` based on research, prioritizing more frequently sought-after combinations. **(Ongoing - can be further expanded)**
+6.  **Review and Refine**: Continuously review generated descriptions for accuracy, tone, and user engagement, refining the underlying logic and content as needed. **(Ongoing)**
